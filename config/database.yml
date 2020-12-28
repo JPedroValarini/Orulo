@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: 885477
+  host: localhost
+
+development:
+  <<: *default
+  database: Orulo_development
+
+test:
+  <<: *default
+  database: Orulo_test
+
+production:
+  <<: *default
+  database: Orulo_production
+  username: Orulo
+  password: <%= ENV['ORULO_DATABASE_PASSWORD'] %>

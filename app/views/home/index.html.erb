@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  </head>
+
+  <body id="home" class="scrollspy">
+
+  <!--navbar -->
+  <header id="main-header">
+    <div class="header-content">
+      <a>Órulo</a>
+      <a> Emprendimentos </a>
+    </div>
+  </header>
+          <div class="row center">
+            <h3 class="header col s12 light text-darken">Bem-vindo a Órulo Emprendimentos</h3>
+            <img class="col s12 center" style="max-height: 500px;" src="https://c0.wallpaperflare.com/preview/389/997/255/porto-alegre-brazil-av-carlos-gomes-city.jpg">
+          </div>
+    </div>
+
+  <!-- About Us -->
+  <section id="about" class="about scrollspy">
+    <div class="container">
+      <div class="row ">
+        <h3 class="center light grey-text text-darken-3">Sobre Nós</h3>
+          <div class="col s12 center light pKiri">
+            <h5>Quem Somos</h5>
+            <p>Com tecnologia e relacionamento com todos os setores do mercado imobiliário, ouvimos com atenção informações de diferentes players. Isso é convertido em dados: demanda, potencial, resultado…
+              Nossa especialidade é categorizar, organizar e qualificar tudo isso através de um algoritmo próprio, disponibilizando estatísticas inteligentes para mais clareza e oportunidades de negócio.
+              Acreditamos que o caminho é a integração e por isso que derrubamos barreiras entre corretores, incorporadores e clientes a fim de estimular diálogos e fomentar novas parcerias.
+              Assim, participamos ativamente da construção de um mercado imobiliário mais promissor e democrático, onde novos produtos nascem com mais garantia de sucesso e clientes encontram com mais facilidade ambientes com as características que procuram.
+              A Órulo e um lugar onde todos podem encontrar respostas para o futuro, a diferença é que trocamos astros por informação com propriedade técnica para que você troque aposta por certeza em seu próximo negócio.</p>
+          </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="services scrollspy grey lighten-4">
+    <div class="container">
+      <div class="row">
+        <h3 class="light center grey-text text-darken-3">Nossos Emprendimentos</h3>
+        <% @buildings['buildings'].each do |building| %>
+        <% favorite = Favorite.where(user: current_user, imovel_id: building['id']).to_a.last %>
+        <% if favorite.present? %>
+          <div class="col center m6 s12">
+            <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+            <img style="max-height: 280px;" src="<%= building['default_image']['520x280']%>">
+              <%= link_to delete_favorite_path(favorite), method: :delete do %>
+                <i class="material-icons">star</i></img>
+              <% end %>
+            </div>
+            <div class="card-content">
+            <h5><%= building['name']%> </h5>
+            <p> A partir de  <%= number_to_currency(building['min_price'], unit: "R$ ", separator: ",", delimiter: ".")%></p>
+          </div>
+        <% else %>
+          <div class="col center m6 s12">
+            <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+            <img style="max-height: 280px;" src="<%= building['default_image']['520x280']%>">
+              <%= link_to favorite_path(building_id: building['id']), method: :post do %>
+                <i class="material-icons">star_border</i></img>
+              <% end %>
+            </div>
+            <div class="card-content">
+            <h5><%= building['name']%> </h5>
+            <p> A partir de  <%= number_to_currency(building['min_price'], unit: "R$ ", separator: ",", delimiter: ".")%></p>
+          </div>
+        <% end %>
+        </div>
+      </div> 
+          <% end %>
+          <ul class="pagination center">
+            <li class="active">
+              <%= link_to home_index_path(page: params[:page].to_i - 1) do %>
+                <i class="material-icons">chevron_left</i>
+              <% end %>
+            </li>
+            <li class="active"><%= link_to "#{params[:page]}", home_index_path(page: params[:page]) %></li>
+            <li class="waves-effect"><%= link_to '2', home_index_path(page: 2) %></li>
+            <li class="waves-effect"><%= link_to '3', home_index_path(page: 3) %></li>
+            <li class="waves-effect"><%= link_to '4', home_index_path(page: 4) %></li>
+            <li class="waves-effect"><%= link_to '5', home_index_path(page: 5) %></li>
+            <li class="waves-effect">
+              <%= link_to home_index_path(page: params[:page].to_i + 1) do %>
+                <i class="material-icons">chevron_right</i>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </section>
+
+<!-- Image -->
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center black-text"><i class="material-icons">location_city</i></h2>
+            <h5 class="center">Incorporadoras</h5>
+
+            <p class="light center">Resolvemos o relacionamento com milhares de corretores e garantimos 
+              dados sempre atualizados para as melhores oportunidades de negócio</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center black-text"><i class="material-icons">business</i></h2>
+            <h5 class="center">Imobiliárias</h5>
+
+            <p class="light center">Resolvemos a integração de CRM para atualização 
+              automática de milhares de ofertas imobiliárias e distribuição de suas exclusividades</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center black-text"><i class="material-icons">card_travel</i></h2>
+            <h5 class="center">Corretores</h5>
+
+            <p class="light center">Resolvemos suas pesquisas e portfólio com 
+              a mais completa ferramenta de pesquisa e inteligência imobiliária para acelerar suas vendas</p>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+
+<!-- Contact -->
+
+<section id="contact" class="contact scrollspy grey lighten-3">
+  <div class="container">
+    <h3 class="light grey-text text-darken-3 center"> Entre em contato</h3>
+    <div class="row">
+      <div class="cd1 col m5 s12">
+        <div class="card-panel blue-grey darken-4 center white-text">
+          <i class="material-icons">email</i>
+          <h5>Contato</h5>
+          <p>Entre em contato diretamente com a Empresa </p>
+        </div>
+
+      <ul class="collection with-header">
+        <li class="collection-header"><h3>Nosso Contato</h3></li>
+        <li class="collection-item">Órulo</li>
+        <li class="collection-item">Endereço: Av. Ipiranga - Partenon, Porto Alegre/RS</li>
+        <li class="collection-item">Telefone : (51) 3907-7098</li>
+        <li class="collection-item">Email : orulos@emprendimentos.com</li>
+      </ul>
+     
+      </div>
+
+      <div class="cd2 col m7 s12">
+        <form>
+          <div class="card-panel">
+            <h5>Por favor preencha o formulário</h5>
+            <div class="input-field">
+              <input placeholder="Nome" />
+              </div>
+              <div class="input-field">
+                <input placeholder="Email" />
+              </div>
+              <div class="input-field">
+                <input placeholder="Telefone" />
+              </div>
+              <div class="input-field">
+                <input placeholder="Mensagem" />
+          </div>
+          <button type="submit" onclick="M.toast({html: '<strong>Mensagem Enviada !</strong>', classes: 'rounded, blue'})" class="btn blue-grey darken-4 waves-effect waves-light">Enviar Mensagem<i class="material-icons right">send</i></button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+
+  <footer class="page-footer blue-grey darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 center">
+          <p class="grey-text text-lighten-4"></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">&copy; Copyright 2020 | by João Pedro
+      </div>
+    </div>
+  </footer>
+  
+  </body>
+</html>

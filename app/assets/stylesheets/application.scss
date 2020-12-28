@@ -1,0 +1,56 @@
+@import 'materialize';
+@import 'material_icons';
+
+header#main-header {
+  background: #263238;
+  height: 80px;
+}
+
+header#main-header .header-content {
+  width: 100%;
+  max-width: 930px;
+  margin: 0 auto;
+  padding: 0 30px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header#main-header .header-content a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 23px;
+}
+
+body#card .card-img-top {
+  max-width: 100%;
+  max-width: 930px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.card-largura {
+  max-width: 18rem;
+}
+
+p {
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pagination li.active {
+  background: #263238 !important;
+}
+.material-icons {
+  font-size: 35px;
+}
+
+@media only screen and (max-width: 1305px) {
+  .row .col.m6 {
+    width: 100% !important;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+  }
+}
