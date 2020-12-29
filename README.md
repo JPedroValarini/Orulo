@@ -1,6 +1,7 @@
 # README
 
-Instruções para rodar o projeto
+Instruções para rodar o projeto 
+
 bundle install 
 
 rails db:create
